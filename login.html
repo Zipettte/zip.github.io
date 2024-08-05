@@ -91,7 +91,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Connexion réussie
-                    window.location.href = 'YOUR_PROTECTED_SITE_URL'; // Rediriger vers le site protégé
+                    window.location.href = 'https://sites.google.com/view/stalya-recrutements/accueil'; // Rediriger vers le site protégé
                 })
                 .catch((error) => {
                     // Gérer les erreurs
@@ -104,7 +104,7 @@
         firebase.auth().onAuthStateChanged(user => {
           if (user) {
             // Utilisateur connecté, redirection
-            window.location.href = 'YOUR_PROTECTED_SITE_URL'; // Rediriger vers le site protégé
+            window.location.href = 'https://sites.google.com/view/stalya-recrutements/accueil'; // Rediriger vers le site protégé
           }
         });
     </script>
