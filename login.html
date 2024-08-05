@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        .login-container input[type="email"], .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+        }
+        .login-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Connexion</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+            <div id="error-message" class="error"></div>
+        </form>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script>
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAksl_tyHIreNu3UCT7IntL4YM60w1eomI",
+            authDomain: "login-stalya-recrutements.firebaseapp.com",
+            projectId: "login-stalya-recrutements",
+            storageBucket: "login-stalya-recrutements.appspot.com",
+            messagingSenderId: "638265206254",
+            appId: "1:638265206254:web:a3c2107f529f15d7d39aff"
+        };
+
+        // Initialiser Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Gestion de la soumission du formulaire de login
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Connexion réussie
+                    window.location.href = 'YOUR_PROTECTED_SITE_URL'; // Rediriger vers le site protégé
+                })
+                .catch((error) => {
+                    // Gérer les erreurs
+                    const errorMessage = error.message;
+                    document.getElementById('error-message').textContent = errorMessage;
+                });
+        });
+
+        // Vérifier l'état de connexion
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            // Utilisateur connecté, redirection
+            window.location.href = 'YOUR_PROTECTED_SITE_URL'; // Rediriger vers le site protégé
+          }
+        });
+    </script>
+</body>
+</html>
